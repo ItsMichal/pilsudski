@@ -10,6 +10,8 @@
   "author": "Michal B",
   "license": "ISC",
   "dependencies": {
-    "api-ai-botkit": "^1.0.3"
+    "api-ai-botkit": "^1.0.3",
+    "botkit": "^0.4.9",
+    "express": "^4.14.0"
   }
 }

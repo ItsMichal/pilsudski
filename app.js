@@ -1,20 +1,24 @@
-const apiaibotkit = require('api-ai-botkit');
-const apiai = apiaibotkit("3338480a082e4f9fb41267b47f303f66");
+var express = require('express');
+var app = express();
 
 var madness = 10;
 
-apiai
-    .action('smalltalk.greetings', function (message, resp, bot) {
-        var responseText = resp.result.fulfillment.speech;
-        console.log(message);
-        bot.reply(message, responseText);
-    })
-    .action('input.unknown', function (message, resp, bot) {
-        console.log(message);
-        bot.reply(message, "Sorry, I don't understand");
-    })
-    .action('test.action', function(message, resp, bot)
-    {   console.log(message);
-        bot.reply(message, "20XX");
-    })
-    ;
+app.get('/webhook', function(rq, rs){
+  var b = rq.body.parameters.trigger;
+  var r = rq.body.result.fulfillment.speech;
+  console.log(b);
+  madness += b;
+
+  res.set('Content-Type', 'application/json');
+  if(b == "r"){
+    madness = 10;
+  }
+
+  if(madness < 0){
+    res.send({"speech": "im mad so ww1 happened", "displayText":"im mad so ww1 happened"});
+
+  }else{
+    res.send({"speech": (r+" Anger Level: " + madness), "displayText":(r+" Anger Level: " + madness)});
+  }
+
+})
