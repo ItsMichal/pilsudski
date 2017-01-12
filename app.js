@@ -27,11 +27,11 @@ app.post('/webhook', function(rq, rs){
     madness = 10;
   }
 
-  if(madness < 0){
+  if(madness <= 0){
     rs.send({"speech": "im mad so ww1 happened", "displayText":"im mad so ww1 happened"});
 
   }else{
-    rs.send({"speech": (r+" Anger Level: " + madness), "displayText":(r+" Anger Level: " + madness)});
+    rs.send({"speech": (r+" Temperment: " + madness + ")"), "displayText":(r+" (Temperment: " + madness+")")});
   }
 
 });
