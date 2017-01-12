@@ -5,10 +5,12 @@ var madness = 10;
 app.get('/', function(rq, rs){
   rs.send("test");
 });
+console.log("hello");
+
 app.post('/webhook', function(rq, rs){
   var b = rq.body.parameters.trigger;
   var r = rq.body.result.fulfillment.speech;
-  console.log(b);
+  console.log(rq);
   madness += b;
 
   rs.set('Content-Type', 'application/json');
