@@ -10,7 +10,7 @@ app.get('/webhook', function(rq, rs){
   madness += b;
 
   res.set('Content-Type', 'application/json');
-  if(b == "r"){
+  if(rq.body.parameters.reset == "r"){
     madness = 10;
   }
 
