@@ -22,7 +22,7 @@ app.post('/webhook', function(rq, rs){
   var r = rq.body.result.fulfillment.speech;
   console.log(b);
   if(!isNaN(b)){
-    if(used.indexOf(rq.body.metadata.intentName) == -1){
+    if(used.indexOf(rq.body.result.metadata.intentName) == -1){
       madness += parseInt(b);
     }
   }
@@ -45,7 +45,7 @@ app.post('/webhook', function(rq, rs){
   }else{
     rs.send({"speech": (r+" (Temperament: " + madness + ")"), "displayText":(r+" (Temperament: " + madness+")")});
   }
-  used.push(rq.body.metadata.intentName);
+  used.push(rq.body.result.metadata.intentName);
 });
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
