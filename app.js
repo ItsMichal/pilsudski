@@ -47,7 +47,7 @@ app.post('/webhook', function(rq, rs){
   }else if (madness >= end_mad){
     rs.send({"speech": "im happy so ww1 didn't happen", "displayText":"im happy so ww1 didn't happen"});
   }else{
-    rs.send({"speech": r, "displayText":(r+" (Temperament: " + madness+")")});
+    rs.send({"speech": r +" ", "displayText":(r+" (Temperament: " + madness+")")});
   }
   used.push(rq.body.result.metadata.intentName);
 });
