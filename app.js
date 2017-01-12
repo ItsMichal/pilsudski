@@ -28,5 +28,7 @@ app.post('/webhook', function(rq, rs){
   }else{
     rs.send({"speech": (r+" Anger Level: " + madness), "displayText":(r+" Anger Level: " + madness)});
   }
-
+  app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'));
+  });
 });
