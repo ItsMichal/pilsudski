@@ -11,16 +11,16 @@ app.post('/webhook', function(rq, rs){
   console.log(b);
   madness += b;
 
-  res.set('Content-Type', 'application/json');
+  rs.set('Content-Type', 'application/json');
   if(rq.body.parameters.reset == "r"){
     madness = 10;
   }
 
   if(madness < 0){
-    res.send({"speech": "im mad so ww1 happened", "displayText":"im mad so ww1 happened"});
+    rs.send({"speech": "im mad so ww1 happened", "displayText":"im mad so ww1 happened"});
 
   }else{
-    res.send({"speech": (r+" Anger Level: " + madness), "displayText":(r+" Anger Level: " + madness)});
+    rs.send({"speech": (r+" Anger Level: " + madness), "displayText":(r+" Anger Level: " + madness)});
   }
 
 });
