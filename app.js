@@ -13,9 +13,10 @@ app.get('/', function(rq, rs){
 console.log("hello");
 
 app.post('/webhook', function(rq, rs){
+  console.log(rq);
   var b = rq.body.parameters.trigger;
   var r = rq.body.result.fulfillment.speech;
-  console.log(rq);
+
   madness += b;
 
   rs.set('Content-Type', 'application/json');
