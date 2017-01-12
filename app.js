@@ -2,7 +2,9 @@ var express = require('express');
 var app = express();
 
 var madness = 10;
-
+app.get('/', function(rq, rs){
+  rs.send("test");
+});
 app.get('/webhook', function(rq, rs){
   var b = rq.body.parameters.trigger;
   var r = rq.body.result.fulfillment.speech;
@@ -21,4 +23,4 @@ app.get('/webhook', function(rq, rs){
     res.send({"speech": (r+" Anger Level: " + madness), "displayText":(r+" Anger Level: " + madness)});
   }
 
-})
+});
