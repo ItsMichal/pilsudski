@@ -1,5 +1,5 @@
 const apiaibotkit = require('api-ai-botkit');
-const apiai = apiaibotkit(3338480a082e4f9fb41267b47f303f66);
+const apiai = apiaibotkit("3338480a082e4f9fb41267b47f303f66");
 
 var madness = 10;
 
