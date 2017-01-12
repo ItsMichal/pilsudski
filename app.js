@@ -17,7 +17,10 @@ app.post('/webhook', function(rq, rs){
   var b = rq.body.result.parameters.trigger;
   var r = rq.body.result.fulfillment.speech;
   console.log(b);
-  madness += parseInt(b);
+  if(!isNaN(b)){
+    madness += parseInt(b);
+  }
+
 
   rs.set('Content-Type', 'application/json');
   if(rq.body.result.parameters.reset == "r"){
