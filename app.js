@@ -6,12 +6,15 @@ var madness = 10;
 apiai
     .action('smalltalk.greetings', function (message, resp, bot) {
         var responseText = resp.result.fulfillment.speech;
+        console.log(message);
         bot.reply(message, responseText);
     })
     .action('input.unknown', function (message, resp, bot) {
+        console.log(message);
         bot.reply(message, "Sorry, I don't understand");
     })
-    .action('test.action', function(message, resp, bot){
-        bot.reply(messahe, "20XX");
+    .action('test.action', function(message, resp, bot)
+    {   console.log(message);
+        bot.reply(message, "20XX");
     })
     ;
