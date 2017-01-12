@@ -10,4 +10,8 @@ apiai
     })
     .action('input.unknown', function (message, resp, bot) {
         bot.reply(message, "Sorry, I don't understand");
-    });
+    })
+    .action('test.action', function(message, resp, bot){
+        bot.reply(messahe, "20XX");
+    })
+    ;
