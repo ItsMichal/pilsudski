@@ -31,7 +31,7 @@ app.post('/webhook', function(rq, rs){
     rs.send({"speech": "im mad so ww1 happened", "displayText":"im mad so ww1 happened"});
 
   }else{
-    rs.send({"speech": (r+" Temperment: " + madness + ")"), "displayText":(r+" (Temperment: " + madness+")")});
+    rs.send({"speech": (r+" (Temperment: " + madness + ")"), "displayText":(r+" (Temperment: " + madness+")")});
   }
 
 });
