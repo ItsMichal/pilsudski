@@ -16,8 +16,9 @@ app.post('/webhook', function(rq, rs){
   console.log(rq);
   var b = rq.body.result.parameters.trigger;
   var r = rq.body.result.fulfillment.speech;
-
-  madness += b;
+  console.log(b);
+  if(typeof b === "number")
+    madness += b;
 
   rs.set('Content-Type', 'application/json');
   if(rq.body.result.parameters.reset == "r"){
