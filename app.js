@@ -20,7 +20,7 @@ app.post('/webhook', function(rq, rs){
   madness += b;
 
   rs.set('Content-Type', 'application/json');
-  if(rq.body.parameters.reset == "r"){
+  if(rq.body.result.parameters.reset == "r"){
     madness = 10;
   }
 
