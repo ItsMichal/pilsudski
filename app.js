@@ -11,7 +11,7 @@ app.get('/', function(rq, rs){
 });
 console.log("hello");
 
-app.post('/webhook', function(rq, rs){
+/*app.post('/webhook', function(rq, rs){
   var b = rq.body.parameters.trigger;
   var r = rq.body.result.fulfillment.speech;
   console.log(rq);
@@ -27,7 +27,7 @@ app.post('/webhook', function(rq, rs){
 
   }else{
     rs.send({"speech": (r+" Anger Level: " + madness), "displayText":(r+" Anger Level: " + madness)});
-  }
+  }*/
   app.listen(app.get('port'), function() {
     console.log('Node app is running on port', app.get('port'));
   });
