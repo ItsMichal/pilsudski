@@ -1,10 +1,11 @@
 var express = require('express');
 var app = express();
+var bp = require('body-parser');
 
 var madness = 10;
 
 app.set('port', (process.env.PORT || 5000));
-
+app.use(bp.json());
 app.use(express.static(__dirname + '/public'));
 app.get('/', function(rq, rs){
   rs.send("test");
