@@ -3,9 +3,10 @@ var app = express();
 var bp = require('body-parser');
 
 
-var madness = start_mad;
+
 var end_mad = 20;
 var start_mad = Math.round(end_mad/2);
+var madness = start_mad;
 var used = [];
 
 app.set('port', (process.env.PORT || 5000));
