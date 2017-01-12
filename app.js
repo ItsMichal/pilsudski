@@ -2,6 +2,10 @@ var express = require('express');
 var app = express();
 
 var madness = 10;
+
+app.set('port', (process.env.PORT || 5000));
+
+app.use(express.static(__dirname + '/public'));
 app.get('/', function(rq, rs){
   rs.send("test");
 });
