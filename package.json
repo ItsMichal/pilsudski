@@ -1,0 +1,14 @@
+{
+  "name": "thekaiser",
+  "version": "1.0.0",
+  "description": "a really bad german ai",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michal B",
+  "license": "ISC",
+  "dependencies": {
+    "api-ai-botkit": "^1.0.3"
+  }
+}
