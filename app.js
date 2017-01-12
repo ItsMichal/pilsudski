@@ -14,7 +14,7 @@ console.log("hello");
 
 app.post('/webhook', function(rq, rs){
   console.log(rq);
-  var b = rq.body.parameters.trigger;
+  var b = rq.body.result.parameters.trigger;
   var r = rq.body.result.fulfillment.speech;
 
   madness += b;
