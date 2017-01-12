@@ -5,7 +5,7 @@ var madness = 10;
 app.get('/', function(rq, rs){
   rs.send("test");
 });
-app.get('/webhook', function(rq, rs){
+app.post('/webhook', function(rq, rs){
   var b = rq.body.parameters.trigger;
   var r = rq.body.result.fulfillment.speech;
   console.log(b);
