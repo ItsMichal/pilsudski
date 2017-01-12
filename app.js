@@ -32,10 +32,12 @@ app.post('/webhook', function(rq, rs){
   rs.set('Content-Type', 'application/json');
   var rst = rq.body.result.parameters.reset;
   if(rst == "r"){
-    madness = 10;
+    madness = start_mad;
     used = [];
   }else if(!isNaN(rst)){
     end_mad = rst;
+    start_mad = Math.round(end_mad/2);
+    madness = start_mad;
   }
 
   if(madness <= 0){
