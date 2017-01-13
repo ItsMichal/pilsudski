@@ -1,12 +1,12 @@
 {
   "name": "thekaiser",
   "version": "1.0.0",
-  "description": "a really bad german ai",
+  "description": "This is basic game logic for Ciegielski's game. Designed to support multiple incoming connections from students using API.AI. If you would like to improve this code, send the revisions to me.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michal B",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "api-ai-botkit": "^1.0.3",
     "body-parser": "^1.15.2",

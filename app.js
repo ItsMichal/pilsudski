@@ -2,55 +2,116 @@ var express = require('express');
 var app = express();
 var bp = require('body-parser');
 
+/**
+* Author: Michal Bodzianowski C 2017
+* MIT license
+*
+* Desc
+*
+* This is basic game logic for Ciegielski's game.  If you would like to improve this code, send the revisions to me.
+* Enjoy!
+*
+* P.S.: Some ideas for improvement might be making Kaiser say something more natural like i.e. "I'm mad" or "I'm happy" in accordance to his temperament. I'm lazy so I just post out a number.
+*       I am, however, eventually going to add support for multiple incoming connections/requests from students using API.AI soon...I say soon but idk when really because of TSA
+*/
 
+//Target temperament for victory. The higher the Temperament, the better. Set by default to 20 (The default lose temperament is zero and cannot be changed)
+var winTemper = 20;
 
-var end_mad = 20;
-var start_mad = Math.round(end_mad/2);
-var madness = start_mad;
-var used = [];
+//Initial temperament. For simplicity, set in between the winTemp and loseTemp
+var initTemper = Math.round(winTemper/2);
 
+//Current temperament.
+var curTemper = initTemper;
+
+//Checks to see if a dialogue has already been said and stores it here
+var staleTexts = [];
+
+//Port setup for hosting platform. Should be 8080 not 5000 by convention but who cares eh
 app.set('port', (process.env.PORT || 5000));
+
+//Sets up express to use json interpreter so I can parse the incoming json request from API.AI
 app.use(bp.json());
+
+//Probably unneccessary but convention (and ctrl+c / ctrl+v from debugging heroku.com)
 app.use(express.static(__dirname + '/public'));
+
+//You can delete this, its pretty unneccessary.
 app.get('/', function(rq, rs){
   rs.send("test");
 });
-console.log("hello");
 
+//I'll seperate the logic into a seperate function later, but right now that's unneccessary
+//If you want to try adding features, please read over this https://docs.api.ai/docs/webhook, it helps
+//Main Logic/Code, this is where API.AI calls me
 app.post('/webhook', function(rq, rs){
-  console.log(rq);
-  var b = rq.body.result.parameters.trigger;
-  var r = rq.body.result.fulfillment.speech;
-  console.log(b);
-  if(!isNaN(b)){
-    if(used.indexOf(rq.body.result.metadata.intentName) == -1){
-      madness += parseInt(b);
+  //Important, API.AI requires this bit
+  rs.set('Content-Type', 'application/json');
+
+  //the change in temper value, derived from the JSON given to me from API.AI. the students will change/set this value in API.AI (video tutorial coming soon)
+  //might be null/NaN
+  var temperDelta = rq.body.result.parameters.trigger;
+
+  //the default response that API.AI wants to give out. I keep it so that it CAN give it back out. Allows students to create custom responses in API.AI without delving in here
+  var aiResponse = rq.body.result.fulfillment.speech;
+
+  //The name of the intent. Intents are an integral part of API.AI. You should know what they are before proceeding,
+  var intent = rq.body.result.metadata.intentName;
+
+  //A user passed variable, called reset, used for setup/admin stuffs. I should probably rename it since it doesn't handle JUST resets anymore.
+  //might be null/NaN
+  var rst = rq.body.result.parameters.reset;
+
+  //I check to see if the students made temperDelta a number. Highly important
+  if(!isNaN(temperDelta)){
+    //I check to see if the response is not stale (so they can't spam 1 question and win). If it is temperament doesn't change. Uncomment that bit to only enable staling for positive bonuses
+    //This means if you keep saying something "bad" it will keep deducting temperament points.
+    if(staleTexts.indexOf(intent) == -1 /*|| temperDelta < 0*/){
+      //finally just add the value to the curTemper, updating it.
+      curTemper += parseInt(temperDelta);
     }
   }
 
-
-  rs.set('Content-Type', 'application/json');
-  var rst = rq.body.result.parameters.reset;
+  //Reset logic
+  //Reset the game and its vars if its set to just r
   if(rst == "r"){
-    madness = start_mad;
-    used = [];
+    curTemper = initTemper;
+    staleTexts = [];
   }else if(!isNaN(rst)){
-    end_mad = rst;
-    start_mad = Math.round(end_mad/2);
-    madness = start_mad;
-    used = [];
+    //or, if its a number, reset the game AND setup a new initial value for winTemper/initTemper
+    winTemper = rst;
+    initTemper = Math.round(winTemper/2);
+    curTemper = initTemper;
+    staleTexts = [];
   }
 
-  if(madness <= 0){
-    rs.send({"speech": "im mad so ww1 happened", "displayText":"im mad so ww1 happened"});
+  //I just made these vars so they are easier to edit. Self-explanatory
+  var loseResponse = "I have decided to declare war immediately. Your pathetic attempts will not stop me or the German Empire.";
+  var winResponse = "After careful consideration, a declaration of war may not be the best course of action for the German Empire. I do not wish to warmonger without good reason.";
+  //If you lose...
+  if(curTemper <= 0){
 
-  }else if (madness >= end_mad){
-    rs.send({"speech": "im happy so ww1 didn't happen", "displayText":"im happy so ww1 didn't happen"});
+    rs.send({"speech": loseResponse, "displayText":loseResponse});
+  //If you lose...
+  }else if (curTemper >= winTemper){
+    //or If you win
+    rs.send({"speech": winResponse, "displayText":winResponse});
   }else{
-    rs.send({"speech": r +" ", "displayText":(r+" (Temperament: " + madness+")")});
+    //otherwise Display Response and then Suffix the Temperament value
+    rs.send({"speech": (aiResponse+" (Temperament: " + curTemper + ")"), "displayText":(aiResponse+" (Temperament: " + curTemper+")")});
   }
-  used.push(rq.body.result.metadata.intentName);
+
+  //Finally, add the current dialogue to the staleTexts. If it's not already there of course
+  if(staleTexts.indexOf(intent) == -1)
+    staleTexts.push(intent);
+
+
+  //DEBUG BLOC
+  ///*uncomment to debug*/ console.log(rq);
+  ///*uncomment to debug*/ console.log(temperDelta);
 });
+
+//Have the app actually run on the server
 app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+  console.log('The Kaiser is Listening...He says inverse starboard ', app.get('port'));
 });
