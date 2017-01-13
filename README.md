@@ -1,5 +1,9 @@
-# ciegielsk-ai-backend
+# Pilsudski
+<img src="https://s-media-cache-ak0.pinimg.com/564x/92/40/de/9240decff227ba682e39b149157a5ad1.jpg" width="111px" height="150px">
+
 Custom made API-AI webhook. Michal Bodzianowski C 2017, MIT License
+
+Named after the leader of Polish troops during WW1
 
 Report bugs to michal.bodzianowski@stemhigh.org
 
