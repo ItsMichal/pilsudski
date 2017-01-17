@@ -10,7 +10,7 @@ Report bugs to michal.bodzianowski@stemhigh.org
 # Installation
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FItsMichal%2Fciegielsk-ai-backend%2Ftree%2Fmaster)
 
-1. First, please deploy to Heroku
+1. First, please deploy to Heroku (**IMPORTANT**: Make sure Automatic Deploys are enabled under the "Deploy" tab!)
 (create an account if you don't have one)
 2. Find your Heroku App URL (usually \<app-name>.heroku.com) and remember it.
 3. Create an API.AI agent, set up and build as normal
