@@ -18,7 +18,7 @@ var fs = require('fs');
 
 //Get Data from Config
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-
+console.log(config);
 //Target temperament for victory. The higher the Temperament, the better. Set by default to 20 (The default lose temperament is zero and cannot be changed)
 var winTemper = config.setup.winTemperament;
 
@@ -103,9 +103,9 @@ app.post('/webhook', function(rq, rs){
   }else{
     //otherwise Display Response and find the appropriate response based on anger and config.json
     var response;
-    if(curTemper > (winTemper-curTemper/4)){
+    if(curTemper > ((winTemper-curTemper)/4)){
       repsonse = config.responses.veryhappy;
-    }else if(curTemper > (winTemper-curTemper/2)){
+    }else if(curTemper > ((winTemper-curTemper)/2)){
       repsonse = config.responses.happy;
     }else if(curTemper < curTemper/2){
       response = config.responses.angry;
