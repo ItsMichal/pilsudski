@@ -114,7 +114,7 @@ app.post('/webhook', function(rq, rs){
     }else{
       response = config.responses.neutral;
     }
-    console.log(response + " & " + config.responses);
+    console.log(response + " & " + JSON.stringify(config.responses));
     //And then just combine the two
     rs.send({"speech": (aiResponse+" "+response), "displayText":(aiResponse+" "+response)});
   }
