@@ -1,0 +1,19 @@
+{
+  "setup":{
+    "__GAME_SETUP":"Start Temperament must be below win Temperament. Lose Temperament is always 0",
+    "startTemperament": 10,
+    "winTemperament": 20,
+  },
+  "responses": {
+    "__GAME_ENDING":"RESPONSES",
+    "win":"After careful consideration, a declaration of war may not be the best course of action for the German Empire. I do not wish to warmonger without good reason.",
+    "lose":"I have decided to declare war immediately. Your pathetic attempts will not stop me or the German Empire.",
+
+    "__TEMPERAMENT":"RESPONSES",
+    "veryhappy":"Your points are incredibly valid...your ideas may hold water.",
+    "happy":"Hmm...I am beginning to change my mind. But not yet.",
+    "neutral":"Continue.",
+    "angry":"Your words are not appreciated...",
+    "veryangry":"Continue, and you will soon feel the wrath of the German Empire"
+  }
+}

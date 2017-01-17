@@ -11,6 +11,7 @@
     "api-ai-botkit": "^1.0.3",
     "body-parser": "^1.15.2",
     "botkit": "^0.4.9",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "fs": "0.0.1-security"
   }
 }

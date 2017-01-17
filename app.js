@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bp = require('body-parser');
+var fs = require('fs');
 
 /**
 * Author: Michal Bodzianowski C 2017
@@ -11,15 +12,18 @@ var bp = require('body-parser');
 * This is basic game logic for Ciegielski's game.  If you would like to improve this code, send the revisions to me.
 * Enjoy!
 *
-* P.S.: Some ideas for improvement might be making Kaiser say something more natural like i.e. "I'm mad" or "I'm happy" in accordance to his temperament. I'm lazy so I just post out a number.
-*       I am, however, eventually going to add support for multiple incoming connections/requests from students using API.AI soon...I say soon but idk when really because of TSA
+* TODO: Nothing really much else. Maybe add some more features? Idk what tho
 */
 
-//Target temperament for victory. The higher the Temperament, the better. Set by default to 20 (The default lose temperament is zero and cannot be changed)
-var winTemper = 20;
 
-//Initial temperament. For simplicity, set in between the winTemp and loseTemp
-var initTemper = Math.round(winTemper/2);
+//Get Data from Config
+var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+
+//Target temperament for victory. The higher the Temperament, the better. Set by default to 20 (The default lose temperament is zero and cannot be changed)
+var winTemper = config.setup.winTemperament;
+
+//Initial temperament. For simplicity, set in between the winTemp and loseTemp UPDATE: uses config.json value
+var initTemper = (config.setup.startTemperament > winTemper) ? Math.round(winTemper/2) : config.setup.startTemperament;
 
 //Current temperament.
 var curTemper = initTemper;
@@ -86,8 +90,8 @@ app.post('/webhook', function(rq, rs){
   }
 
   //I just made these vars so they are easier to edit. Self-explanatory
-  var loseResponse = "I have decided to declare war immediately. Your pathetic attempts will not stop me or the German Empire.";
-  var winResponse = "After careful consideration, a declaration of war may not be the best course of action for the German Empire. I do not wish to warmonger without good reason.";
+  var loseResponse = config.responses.lose;
+  var winResponse = config.responses.win;
   //If you lose...
   if(curTemper <= 0){
 
@@ -97,8 +101,22 @@ app.post('/webhook', function(rq, rs){
     //or If you win
     rs.send({"speech": winResponse, "displayText":winResponse});
   }else{
-    //otherwise Display Response and then Suffix the Temperament value
-    rs.send({"speech": (aiResponse+" (Temperament: " + curTemper + ")"), "displayText":(aiResponse+" (Temperament: " + curTemper+")")});
+    //otherwise Display Response and find the appropriate response based on anger and config.json
+    var response;
+    if(curTemper > (winTemper-curTemper/4)){
+      repsonse = config.responses.veryhappy;
+    }else if(curTemper > (winTemper-curTemper/2)){
+      repsonse = config.responses.happy;
+    }else if(curTemper < curTemper/2){
+      response = config.responses.angry;
+    }else if(curTemper < ((3*curTemper)/4)){
+      response = config.responses.veryangry;
+    }else{
+      response = config.responses.neutral;
+    }
+
+    //And then just combine the two
+    rs.send({"speech": (aiResponse+" "+response), "displayText":(aiResponse+" "+response)});
   }
 
   //Finally, add the current dialogue to the staleTexts. If it's not already there of course

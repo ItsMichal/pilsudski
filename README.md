@@ -1,7 +1,7 @@
 # Pilsudski
 <img src="https://s-media-cache-ak0.pinimg.com/564x/92/40/de/9240decff227ba682e39b149157a5ad1.jpg" width="111px" height="150px">
 
-Custom made API-AI webhook. Michal Bodzianowski C 2017, MIT License
+Custom made API-AI webhook. Michal Bodzianowski C 2017, MIT License, v1.1.0
 
 Named after the leader of Polish troops during WW1
 
@@ -36,7 +36,8 @@ And there you are done.
 | reset | @sys.any | r | Use this parameter only if you want the trigger to reset the game. This is optional |
 | reset | @sys.number-integer | Any positive number. Recommended ceiling of 100 | This sets the winning target for the game. I don't recommend using this feature. It will reset the game, and you will start with 1/2 of whatever value you entered, in Temperament. The game functions the same way. |
 
-I highly recommend not using the reset parameter, but its your choice. 
+I highly recommend not using the reset parameter, but its your choice.
 
-# Other
-I'll make a video soon explaining the setup, so its clearer
+# Advanced
+
+If you are an advanced user, you can fork this repo and edit the config.json. This provides advanced customization options for your AI. You can then proceed and use the github repo with Heroku, and then just follow the rest of the directions as normal.
