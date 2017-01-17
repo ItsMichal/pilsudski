@@ -102,7 +102,7 @@ app.post('/webhook', function(rq, rs){
     rs.send({"speech": winResponse, "displayText":winResponse});
   }else{
     //otherwise Display Response and find the appropriate response based on anger and config.json
-    var response;
+    var response = "";
     if(curTemper > (winTemper-(curTemper/4))){
       repsonse = config.responses.veryhappy;
     }else if(curTemper > (winTemper-curTemper/2)){
