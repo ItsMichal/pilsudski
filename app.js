@@ -103,7 +103,7 @@ app.post('/webhook', function(rq, rs){
   }else{
     //otherwise Display Response and find the appropriate response based on anger and config.json
     var response;
-    if(curTemper > (winTemper-curTemper/4)){
+    if(curTemper > (winTemper-(curTemper/4))){
       repsonse = config.responses.veryhappy;
     }else if(curTemper > (winTemper-curTemper/2)){
       repsonse = config.responses.happy;
