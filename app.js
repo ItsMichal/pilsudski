@@ -97,11 +97,11 @@ app.post('/webhook', function(rq, rs){
   //If you lose...
   if(curTemper <= 0){
 
-    rs.send({"speech": loseResponse, "displayText":loseResponse});
+    rs.send({"speech": aiResponse+" "+feedback+" "+loseResponse, "displayText":aiResponse+" "+feedback+" "+loseResponse});
   //If you lose...
   }else if (curTemper >= winTemper){
     //or If you win
-    rs.send({"speech": winResponse, "displayText":winResponse});
+    rs.send({"speech": aiResponse+" "+feedback+" "+winResponse, "displayText":aiResponse+" "+feedback+" "+winResponse});
   }else{
     //otherwise Display Response and find the appropriate response based on anger and config.json
 
