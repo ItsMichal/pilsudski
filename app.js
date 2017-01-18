@@ -105,7 +105,7 @@ app.post('/webhook', function(rq, rs){
     console.log(response + " & " + JSON.stringify(config.responses) + "&" + config.responses.neutral + "&" +config.responses.happy);
     var testcase = config.responses.happy;
     console.log(testcase);
-    var response;
+    var response = config.responses.neutral;
     if(curTemper > (winTemper-(curTemper/4))){
       repsonse = config.responses.veryhappy;
       console.log("1HERE " + response);
