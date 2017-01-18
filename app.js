@@ -103,10 +103,12 @@ app.post('/webhook', function(rq, rs){
   }else{
     //otherwise Display Response and find the appropriate response based on anger and config.json
     //debugging this took forever, thanks to JS's dynamic data types.
+    console.log(curTemper);
+    console.log(winTemper);
     var response = config.responses.neutral;
     if(curTemper > ((3*winTemper)/4)){
       repsonse = config.responses.veryhappy;
-    }else if(curTemper > (winTemper/2)){
+    }else if(curTemper > winTemper/2){
       repsonse = config.responses.happy;
     }else if(curTemper < winTemper-((3*winTemper)/4)){
       response = config.responses.veryangry;
