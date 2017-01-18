@@ -104,15 +104,20 @@ app.post('/webhook', function(rq, rs){
     //otherwise Display Response and find the appropriate response based on anger and config.json
     var response = "";
     if(curTemper > (winTemper-(curTemper/4))){
-      repsonse = config.responses.veryhappy;
+      repsonse = ""+config.responses.veryhappy;
+      console.log("1HERE " + response);
     }else if(curTemper > (winTemper-curTemper/2)){
-      repsonse = config.responses.happy;
+      repsonse = ""+config.responses.happy;
+      console.log("2HERE " + response);
     }else if(curTemper < curTemper/2){
-      response = config.responses.angry;
+      response = ""+config.responses.angry;
+      console.log("3HERE " + response);
     }else if(curTemper < ((3*curTemper)/4)){
-      response = config.responses.veryangry;
+      response = ""+config.responses.veryangry;
+      console.log("4HERE " + response);
     }else{
-      response = config.responses.neutral;
+      response = ""+config.responses.neutral;
+      console.log("5HERE " + response);
     }
     console.log(response + " & " + JSON.stringify(config.responses) + "&" + config.responses.neutral + "&" +config.responses.happy);
     //And then just combine the two
