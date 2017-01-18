@@ -1,3 +1,5 @@
+"use strict";
+
 var express = require('express');
 var app = express();
 var bp = require('body-parser');
@@ -109,7 +111,7 @@ app.post('/webhook', function(rq, rs){
     //TYPO
 
     //rip
-    
+
     var response = config.responses.neutral;
     if(curTemper > ((3*winTemper)/4)){
       response = config.responses.veryhappy;
