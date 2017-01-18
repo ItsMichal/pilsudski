@@ -108,10 +108,10 @@ app.post('/webhook', function(rq, rs){
     var response = config.responses.neutral;
     if(curTemper > ((3*winTemper)/4)){
       repsonse = config.responses.veryhappy;
-      console.log("HERE2");
+      console.log("HERE2" + typeof response + " & " + typeof config.responses.veryhappy);
     }else if(curTemper > winTemper/2){
       repsonse = config.responses.happy;
-      console.log("HERE");
+      console.log("HERE" + typeof response + " & " + typeof config.responses.veryhappy);
     }else if(curTemper < winTemper-((3*winTemper)/4)){
       response = config.responses.veryangry;
     }else if(curTemper < winTemper/2){
