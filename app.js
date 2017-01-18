@@ -1,3 +1,5 @@
+"use strict";
+
 var express = require('express');
 var app = express();
 var bp = require('body-parser');
@@ -110,7 +112,7 @@ app.post('/webhook', function(rq, rs){
     //TYPO
 
     //rip
-    
+
     var response = config.responses.neutral;
     if(curTemper > ((3*winTemper)/4)){
       response = config.responses.veryhappy;
@@ -121,8 +123,16 @@ app.post('/webhook', function(rq, rs){
     }else if(curTemper < winTemper/2){
       response = config.responses.angry;
     }
+
+    //tells user if they are doing good or nah\
+    //terrible logic, idgaf tho
+    var feedback = config.responses.same;
+    if(!isNaN(temperDelta) && parseInt(temperDelta) != 0){
+      feedback = (parseInt(temperDelta) > 0) ? config.responses.good : config.responses.bad;
+    }
+
     //And then just combine the two
-    rs.send({"speech": (aiResponse+" "+response), "displayText":(aiResponse+" "+response)});
+    rs.send({"speech": (aiResponse+" "+feedback+" "+response), "displayText":(aiResponse+" "+feedback+" "+response)});
   }
 
   //Finally, add the current dialogue to the staleTexts. If it's not already there of course
