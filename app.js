@@ -124,8 +124,9 @@ app.post('/webhook', function(rq, rs){
       response = config.responses.angry;
     }
 
-    //tells user if they are doing good or nah
-    var feedback = (!isNaN(temperDelta) && parseInt(temperDelta) > 0 ) ? config.responses.good : ((parseInt(temperDelta) != 0) ? config.responses.bad : config.responses.same);
+    //tells user if they are doing good or nah\
+    //terrible logic, idgaf tho
+    var feedback = (!isNaN(temperDelta) && parseInt(temperDelta) > 0 ) ? config.responses.good : ((!isNaN(temperDelta) && parseInt(temperDelta) != 0) ? config.responses.bad : config.responses.same);
 
     //And then just combine the two
     rs.send({"speech": (aiResponse+" "+response+" "+feedback), "displayText":(aiResponse+" "+response+" "+feedback)});
