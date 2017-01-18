@@ -108,10 +108,10 @@ app.post('/webhook', function(rq, rs){
       repsonse = config.responses.veryhappy;
     }else if(curTemper > (winTemper/2)){
       repsonse = config.responses.happy;
+    }else if(curTemper < winTemper-((3*winTemper)/4)){
+      response = config.responses.veryangry;
     }else if(curTemper < winTemper/2){
       response = config.responses.angry;
-    }else if(curTemper < ((3*winTemper)/4)){
-      response = config.responses.veryangry;
     }
     //And then just combine the two
     rs.send({"speech": (aiResponse+" "+response), "displayText":(aiResponse+" "+response)});
