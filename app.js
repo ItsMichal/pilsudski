@@ -106,19 +106,19 @@ app.post('/webhook', function(rq, rs){
 
     var response = "";
     if(curTemper > (winTemper-(curTemper/4))){
-      repsonse = ""+config.responses.veryhappy;
+      repsonse = ""+JSON.stringify(config.responses.veryhappy);
       console.log("1HERE " + response);
     }else if(curTemper > (winTemper-curTemper/2)){
-      repsonse = ""+config.responses.happy;
+      repsonse = ""+JSON.stringify(config.responses.happy);
       console.log("2HERE " + response);
     }else if(curTemper < curTemper/2){
-      response = ""+config.responses.angry;
+      response = ""+JSON.stringify(config.responses.angry);
       console.log("3HERE " + response);
     }else if(curTemper < ((3*curTemper)/4)){
-      response = ""+config.responses.veryangry;
+      response = ""+JSON.stringify(config.responses.veryangry);
       console.log("4HERE " + response);
     }else{
-      response = ""+config.responses.neutral;
+      response = ""+JSON.stringify(config.responses.neutral);
       console.log("5HERE " + response);
     }
     //And then just combine the two
