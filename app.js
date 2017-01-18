@@ -123,8 +123,12 @@ app.post('/webhook', function(rq, rs){
     }else if(curTemper < winTemper/2){
       response = config.responses.angry;
     }
+
+    //tells user if they are doing good or nah
+    var feedback = (!isNaN(temperDelta) && parseInt(temperDelta) > 0 ) ? config.responses.good : ((parseInt(temperDelta) != 0) ? config.responses.bad : config.responses.same);
+
     //And then just combine the two
-    rs.send({"speech": (aiResponse+" "+response), "displayText":(aiResponse+" "+response)});
+    rs.send({"speech": (aiResponse+" "+response+" "+feedback), "displayText":(aiResponse+" "+response+" "+feedback)});
   }
 
   //Finally, add the current dialogue to the staleTexts. If it's not already there of course
