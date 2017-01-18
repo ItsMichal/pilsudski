@@ -102,25 +102,16 @@ app.post('/webhook', function(rq, rs){
     rs.send({"speech": winResponse, "displayText":winResponse});
   }else{
     //otherwise Display Response and find the appropriate response based on anger and config.json
-    console.log(response + " & " + JSON.stringify(config.responses) + "&" + config.responses.neutral + "&" +config.responses.happy);
-    var testcase = config.responses.happy;
-    console.log(testcase);
+    //debugging this took forever, thanks to JS's dynamic data types.
     var response = config.responses.neutral;
-    if(curTemper > (winTemper-(curTemper/4))){
+    if(curTemper > ((3*winTemper)/4)){
       repsonse = config.responses.veryhappy;
-      console.log("1HERE " + response);
-    }else if(curTemper > (winTemper-curTemper/2)){
+    }else if(curTemper > (winTemper/2)){
       repsonse = config.responses.happy;
-      console.log("2HERE " + response);
-    }else if(curTemper < curTemper/2){
+    }else if(curTemper < winTemper/2){
       response = config.responses.angry;
-      console.log("3HERE " + response);
-    }else if(curTemper < ((3*curTemper)/4)){
+    }else if(curTemper < ((3*winTemper)/4)){
       response = config.responses.veryangry;
-      console.log("4HERE " + response);
-    }else{
-      response = config.responses.neutral;
-      console.log("5HERE " + response);
     }
     //And then just combine the two
     rs.send({"speech": (aiResponse+" "+response), "displayText":(aiResponse+" "+response)});
