@@ -7,10 +7,19 @@ Named after the leader of Polish troops during WW1
 
 Report bugs to michal.bodzianowski@stemhigh.org
 
+# Youtube Video Guide
+
+[![video tutorial](http://img.youtube.com/vi/qcjxwh1tkck/0.jpg)](http://www.youtube.com/watch?v=qcjxwh1tkck "Pilsudski Tutorial")
+
+If the instructions are not clear enough for you, I made a video as well. This is a complete guide to integrating Pilsudski with API.AI
+
+Video URL: https://www.youtube.com/watch?v=qcjxwh1tkck
+
 # Installation
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FItsMichal%2Fciegielsk-ai-backend%2Ftree%2Fmaster)
 
-1. First, please deploy to Heroku (**IMPORTANT**: Make sure Automatic Deploys are enabled under the "Deploy" tab!)
+1. First, please deploy to Heroku
 (create an account if you don't have one)
 2. Find your Heroku App URL (usually \<app-name>.heroku.com) and remember it.
 3. Create an API.AI agent, set up and build as normal
