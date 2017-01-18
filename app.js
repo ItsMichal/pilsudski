@@ -19,8 +19,6 @@ var fs = require('fs');
 //Get Data from Config
 var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
-var responses = config.responses;
-
 //Target temperament for victory. The higher the Temperament, the better. Set by default to 20 (The default lose temperament is zero and cannot be changed)
 var winTemper = config.setup.winTemperament;
 
@@ -92,8 +90,8 @@ app.post('/webhook', function(rq, rs){
   }
 
   //I just made these vars so they are easier to edit. Self-explanatory
-  var loseResponse = responses.lose;
-  var winResponse = responses.win;
+  var loseResponse = config.responses.lose;
+  var winResponse = config.responses.win;
   //If you lose...
   if(curTemper <= 0){
 
@@ -105,17 +103,22 @@ app.post('/webhook', function(rq, rs){
   }else{
     //otherwise Display Response and find the appropriate response based on anger and config.json
     //debugging this took forever, thanks to JS's dynamic data types.
-    console.log(curTemper);
-    console.log(winTemper);
-    var response = responses.neutral;
+
+    //IT TOOK FOREVER BECAUSE OF A
+    //FRIGGIN
+    //TYPO
+
+    //rip
+    
+    var response = config.responses.neutral;
     if(curTemper > ((3*winTemper)/4)){
-      repsonse = responses["veryhappy"];
+      response = config.responses.veryhappy;
     }else if(curTemper > winTemper/2){
-      repsonse = JSON.stringify(config.responses.happy);
+      response = config.responses.happy;
     }else if(curTemper < winTemper-((3*winTemper)/4)){
-      response = responses.veryangry;
+      response = config.responses.veryangry;
     }else if(curTemper < winTemper/2){
-      response = responses.angry;
+      response = config.responses.angry;
     }
     //And then just combine the two
     rs.send({"speech": (aiResponse+" "+response), "displayText":(aiResponse+" "+response)});
