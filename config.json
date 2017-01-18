@@ -10,10 +10,13 @@
     "lose":"I have decided to declare war immediately. Your pathetic attempts will not stop me or the German Empire.",
 
     "__TEMPERAMENT":"RESPONSES",
-    "veryhappy":"Your points are incredibly valid...your ideas may hold water.",
-    "happy":"Hmm...I am beginning to change my mind. But not yet.",
+    "veryhappy":"Your points are incredibly valid...your ideas do hold water.",
+    "happy":"Hmm...I am beginning to change my mind.",
     "neutral":"Continue.",
     "angry":"Your words are not appreciated...",
-    "veryangry":"Continue, and you will soon feel the wrath of the German Empire"
+    "veryangry":"Continue, and you will soon feel the wrath of the German Empire.",
+
+    "good":"But I think I am getting better, because of that statement.",
+    "bad":"But that statement has swayed my mind towards war."
   }
 }
