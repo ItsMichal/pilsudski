@@ -1,5 +1,7 @@
-# Pilsudski
+# Pilsudski Legacy Fallback Branch (v1.1.2)
 <img src="https://s-media-cache-ak0.pinimg.com/564x/92/40/de/9240decff227ba682e39b149157a5ad1.jpg" width="111px" height="150px">
+
+**IMPORTANT: This is the legacy fallback for v1.1.2. This version does not contain the new features present in v1.2. Using this branch is not recommended, and is here for legacy purposes. It probably won't be maintained**
 
 Custom made API-AI webhook. Michal Bodzianowski C 2017, MIT License, v1.1.2
 
@@ -17,7 +19,7 @@ Video URL: https://www.youtube.com/watch?v=qcjxwh1tkck
 
 # Installation
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FItsMichal%2Fciegielsk-ai-backend%2Ftree%2Fmaster)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FItsMichal%2Fciegielsk-ai-backend%2Ftree%2F1.1)
 
 1. First, please deploy to Heroku
 (create an account if you don't have one)
