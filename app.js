@@ -4,8 +4,8 @@ var app = express();
 var bp = require('body-parser');
 var fs = require('fs');
 var path = require('path');
-var http = require('http').Server(app);
-var io = require('socket.io')(app);
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
 var https = require('https');
 var urlParse  = require('url').parse;
 var googleTTS = require('google-tts-api');
@@ -285,6 +285,6 @@ function ptchshift(){
 
 
 //Have the app actually run on the server
-app.listen(app.get('port'), function() {
+http.listen(app.get('port'), function() {
   console.log('The Kaiser is Listening...He says inverse starboard ', app.get('port'));
 });
