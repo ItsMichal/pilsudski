@@ -51,7 +51,7 @@ app.use(express.static(__dirname + '/public'));
 
 //You can delete this, its pretty unneccessary.
 app.get('/', function(rq, rs){
-  rs.send(app.html);
+  rs.send('/app.html');
 });
 
 //I'll seperate the logic into a seperate function later, but right now that's unneccessary
