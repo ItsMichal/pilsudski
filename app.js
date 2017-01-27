@@ -5,7 +5,7 @@ var bp = require('body-parser');
 var fs = require('fs');
 var path = require('path');
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var io = require('socket.io')(app);
 var https = require('https');
 var urlParse  = require('url').parse;
 var googleTTS = require('google-tts-api');
@@ -56,6 +56,10 @@ app.get('/', function(rq, rs){
 
 app.get('/final.mp3', function(rq, rs){
   rs.sendFile(path.join(__dirname + '/final.mp3'));
+});
+
+io.on('connection', function(socket){
+  console.log("user connected");
 });
 
 //I'll seperate the logic into a seperate function later, but right now that's unneccessary
