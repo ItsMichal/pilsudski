@@ -5,6 +5,7 @@ var bp = require('body-parser');
 var fs = require('fs');
 var path = require('path');
 var http = require('http').Server(app);
+http.listen(process.env.PORT || 8080);
 var io = require('socket.io')(http);
 var https = require('https');
 var urlParse  = require('url').parse;
@@ -52,6 +53,10 @@ app.use(express.static(__dirname + '/public'));
 //You can delete this, its pretty unneccessary.
 app.get('/', function(rq, rs){
   rs.sendFile(path.join(__dirname + '/app.html'));
+});
+
+app.get('/final.mp3', function(rq, rs){
+  rs.sendFile(path.join(__dirname + '/final.mp3'));
 });
 
 //I'll seperate the logic into a seperate function later, but right now that's unneccessary
@@ -133,6 +138,7 @@ app.post('/webhook', function(rq, rs){
     rs.send({"speech": (aiResponse+" "+response), "displayText":(aiResponse+" "+response)});
     tts(aiResponse+" "+response);
     io.emit('audio-update');
+    console.log('Done sent audio update');
   }
 
   //Finally, add the current dialogue to the staleTexts. If it's not already there of course
@@ -242,7 +248,7 @@ function onFormat (format) {
   // encoding the wave file into an MP3 is as simple as calling pipe()
   var encoder = new lame.Encoder(mformat);
   decoder.pipe(encoder).pipe(outputsound);
-  console.log("done");
+  //console.log("done");
 }
 
 function ptchshift(){
