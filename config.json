@@ -10,14 +10,16 @@
     "lose":"I have decided to declare war immediately. Your pathetic attempts will not stop me or the German Empire.",
 
     "__TEMPERAMENT":"RESPONSES",
-    "veryhappy":"Your points are incredibly valid...your ideas do hold water.",
-    "happy":"Hmm...War may be, in fact, evitable...maybe.",
-    "neutral":"Continue.",
-    "angry":"Your words are not appreciated...",
-    "veryangry":"You will soon feel the wrath of the German Empire.",
+    "veryhappy":"Overall, Your points are incredibly valid...your ideas do hold water.",
+    "happy":"Overall, Hmm...War may be, in fact, evitable...maybe.",
+    "neutral":"Overall, Continue.",
+    "angry":"Overall, Your words are not appreciated...",
+    "veryangry":"Overall, You will soon feel the wrath of the German Empire.",
 
     "good":"I think I am getting better, because of that statement.",
     "bad":"That statement has swayed my mind towards war.",
-    "same":""
+    "same":"",
+
+    "stale": "You've already asked me that, haven't you?. It won't change my mind, but..."
   }
 }
