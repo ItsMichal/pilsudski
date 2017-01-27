@@ -54,7 +54,7 @@ app.get('/', function(rq, rs){
   rs.sendFile(path.join(__dirname + '/app.html'));
 });
 
-app.get('/final.mp3', function(rq, rs){
+app.get(['/final.mp3', '/final.mp3*'], function(rq, rs){
   rs.sendFile(path.join(__dirname + '/final.mp3'));
 });
 
