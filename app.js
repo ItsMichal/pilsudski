@@ -48,10 +48,12 @@ app.use(bp.json());
 //Probably unneccessary but convention (and ctrl+c / ctrl+v from debugging heroku.com)
 app.use(express.static(__dirname + '/public'));
 
+mu.root = __dirname;
+m
 
 //You can delete this, its pretty unneccessary.
 app.get('/', function(rq, rs){
-  rs.send('app.html');
+  rs.send(app.html);
 });
 
 //I'll seperate the logic into a seperate function later, but right now that's unneccessary
