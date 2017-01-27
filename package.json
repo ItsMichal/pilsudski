@@ -10,8 +10,11 @@
   "dependencies": {
     "api-ai-botkit": "^1.0.3",
     "body-parser": "^1.15.2",
-    "botkit": "^0.4.9",
     "express": "^4.14.0",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "google-tts-api": "0.0.1",
+    "lame": "^1.2.4",
+    "socket.io": "^1.7.2",
+    "wav": "^1.0.1"
   }
 }

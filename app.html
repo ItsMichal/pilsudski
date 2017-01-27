@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Prototype Ciegielski Head
+    </title>
+  </head>
+  <body>
+    <h1>Filler</h1>
+    <p>stuff stuff</p>
+
+    <div id="audio">
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      document.getElementById("audio").innerHTML = '<audio src="'+document.URL+'/final.mp3?lol='+new Date().getTime()+'" autoplay>';
+      socket.on('audio-update', function(){
+        document.getElementById("audio").innerHTML = '<audio src="'+document.URL+'/final.mp3?lol='+new Date().getTime()+'" autoplay>';
+      });
+    </script>
+  </body>
+</html>
