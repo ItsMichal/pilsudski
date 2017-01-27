@@ -14,6 +14,9 @@
     "express": "^4.14.0",
     "fs": "0.0.1-security",
     "google-tts": "^1.1.2",
-    "google-tts-api": "0.0.1"
+    "google-tts-api": "0.0.1",
+    "mu2": "^0.5.21",
+    "socket.io": "^1.7.2",
+    "wav": "^1.0.1"
   }
 }

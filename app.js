@@ -4,11 +4,14 @@ var app = express();
 var bp = require('body-parser');
 var fs = require('fs');
 var path = require('path');
-var http = require('http');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 var https = require('https');
 var urlParse  = require('url').parse;
 var googleTTS = require('google-tts-api');
 var lame = require('lame');
+var wav = require('wav');
+var mu = require('mu2');
 /**
 * Author: Michal Bodzianowski C 2017
 * MIT license
@@ -46,9 +49,12 @@ app.use(bp.json());
 //Probably unneccessary but convention (and ctrl+c / ctrl+v from debugging heroku.com)
 app.use(express.static(__dirname + '/public'));
 
+mu.root = __dirname;
+m
+
 //You can delete this, its pretty unneccessary.
 app.get('/', function(rq, rs){
-  rs.send("test");
+  rs.send('app.html');
 });
 
 //I'll seperate the logic into a seperate function later, but right now that's unneccessary
@@ -83,6 +89,7 @@ app.post('/webhook', function(rq, rs){
       curTemper += parseInt(temperDelta);
     }else{
       //do what you said here
+      rs.send(config.responses.stale + " " + aiResponse)
     }
   }
 
@@ -127,6 +134,8 @@ app.post('/webhook', function(rq, rs){
     }
     //And then just combine the two
     rs.send({"speech": (aiResponse+" "+response), "displayText":(aiResponse+" "+response)});
+    tts(aiResponse+" "+response);
+    io.emit('audio-update');
   }
 
   //Finally, add the current dialogue to the staleTexts. If it's not already there of course
@@ -152,7 +161,10 @@ function downloadFile (url, dest) {
       host: info.host,
       path: info.path,
       headers: {
-        'user-agent': 'KAISER_WILHELM'
+
+        'Accept-Language': 'en-US',
+        'Authorization': 'Bearer c1f828342331434c97ca20be01c3e317'
+
       }
     };
 
@@ -166,8 +178,9 @@ function downloadFile (url, dest) {
       var file = fs.createWriteStream(dest);
       file.on('finish', function() {
         // close() is async, call resolve after close completes.
-        file.close(resolve);
         ptchshift();
+        file.close(resolve);
+
       });
       file.on('error', function (err) {
         // Delete the file async. (But we don't check the result)
@@ -185,18 +198,18 @@ function downloadFile (url, dest) {
 }
 
 
-tts("I am the Kaiser, and the Kaiser is me. I am the Kaiser, who speaks for the trees. Nice, bait mate. Gonna rap, till Im late");
-
+//tts("In spite of the fact that we have no such fleet as we should have, we have conquered for ourselves a place in the sun. It will now be my task to see to it that this place in the sun shall remain our undisputed possession, in order that the sun's rays may fall fruitfully upon our activity and trade in foreign parts, that our industry and agriculture may develop within the state and our sailing sports upon the water, for our future lies upon the water.")
 
 function tts(x){
-  googleTTS(x, 'en', 1.8)
+  googleTTS(x, 'de', 1.9)
   .then(function (url) {
     console.log(url); // https://translate.google.com/translate_tts?...
-
-    var dest = path.resolve(__dirname, 'base.mp3'); // file destination
+    var nurl = "https://api.api.ai/v1/tts?text="+x+"";
+    console.log(nurl);
+    var dest = path.resolve(__dirname, 'base.wav'); // file destination
     console.log('Download to ' + dest + ' ...');
 
-    return downloadFile(url, dest);
+    return downloadFile(nurl, dest);
   })
   .then(function () {
     console.log('Download success');
@@ -232,12 +245,13 @@ function onFormat (format) {
   // encoding the wave file into an MP3 is as simple as calling pipe()
   var encoder = new lame.Encoder(mformat);
   decoder.pipe(encoder).pipe(outputsound);
+  console.log("done");
 }
 
 function ptchshift(){
-  inputsound = fs.createReadStream("base.mp3");
+  inputsound = fs.createReadStream("base.wav");
   outputsound = fs.createWriteStream("final.mp3");
-  decoder = new lame.Decoder();
+  decoder = new wav.Reader();
   decoder.on('format', onFormat);
   inputsound.pipe(decoder);
 
