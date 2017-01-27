@@ -15,8 +15,9 @@
     <script>
       var socket = io();
       document.getElementById("audio").innerHTML = '<audio src="'+document.URL+'final.mp3 autoplay>';
+
       socket.on('audio-update', function(){
-        document.getElementById("audio").innerHTML = '<audio src="'+document.URL+'final.mp3?lol='+new Date().getTime()+'" autoplay>';
+        document.getElementById("audio").innerHTML = '<audio src="'+document.URL+'final.mp3" autoplay>';
         console.log("updating audio");
       });
     </script>
