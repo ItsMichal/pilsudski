@@ -94,7 +94,7 @@ app.post('/webhook', function(rq, rs){
       curTemper += parseInt(temperDelta);
     }else{
       //do what you said here
-      rs.send(config.responses.stale + " " + aiResponse)
+      rs.send({"speech":(config.responses.stale + " " + aiResponse), "displayText":(config.responses.stale + " " + aiResponse)});
     }
   }
 
@@ -209,7 +209,7 @@ function tts(x){
   googleTTS(x, 'de', 1.9)
   .then(function (url) {
     console.log(url); // https://translate.google.com/translate_tts?...
-    var nurl = "https://api.api.ai/v1/tts?text="+x+"";
+    var nurl = "https://api.api.ai/v1/tts?text="+encodeURIComponent(x)+"";
     console.log(nurl);
     var dest = path.resolve(__dirname, 'base.wav'); // file destination
     console.log('Download to ' + dest + ' ...');
