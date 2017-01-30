@@ -139,7 +139,7 @@ app.post('/webhook', function(rq, rs){
     }
     //And then just combine the two
     rs.send({"speech": (aiResponse+" "+response), "displayText":(aiResponse+" "+response)});
-    tts(aiResponse+" "+response).then(function(){io.emit('audio-update');});
+    tts(aiResponse+" "+response);
 
   }
 
@@ -251,6 +251,7 @@ function onFormat (format) {
   var encoder = new lame.Encoder(mformat);
   decoder.pipe(encoder).pipe(outputsound);
   console.log("done");
+  io.emit('audio-update');
 }
 
 function ptchshift(){
