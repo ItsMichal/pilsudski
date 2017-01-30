@@ -139,8 +139,8 @@ app.post('/webhook', function(rq, rs){
     }
     //And then just combine the two
     rs.send({"speech": (aiResponse+" "+response), "displayText":(aiResponse+" "+response)});
-    tts(aiResponse+" "+response);
-    io.emit('audio-update');
+    tts(aiResponse+" "+response).then(function(){io.emit('audio-update');});
+
   }
 
   //Finally, add the current dialogue to the staleTexts. If it's not already there of course
