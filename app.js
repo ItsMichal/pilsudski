@@ -212,7 +212,8 @@ function tts(x){
   googleTTS(x, 'de', 1.9)
   .then(function (url) {
     console.log(url); // https://translate.google.com/translate_tts?...
-    var nurl = "https://api.api.ai/v1/tts?text="+encodeURIComponent(x)+"";
+    //var nurl = "https://api.api.ai/v1/tts?text="+encodeURIComponent(x)+"";
+    var nurl = 'https://infinite-lake-18103.herokuapp.com/?text="'+encodeURIComponent(x)+'"';
     console.log(nurl);
     var dest = path.resolve(__dirname, 'base.wav'); // file destination
     console.log('Download to ' + dest + ' ...');
