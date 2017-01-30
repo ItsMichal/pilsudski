@@ -17,7 +17,7 @@
       document.getElementById("audio").innerHTML = '<audio src="'+document.URL+'final.mp3 autoplay>';
 
       socket.on('audio-update', function(){
-        document.getElementById("audio").innerHTML = '<audio src="'+document.URL+'final.mp3" autoplay>';
+        document.getElementById("audio").innerHTML = 'updated <audio src="'+document.URL+'final.mp3'+new Date().getTime()+'" autoplay>';
         console.log("updating audio");
       });
     </script>
