@@ -250,7 +250,7 @@ var outputsound;
 function onFormat (format) {
   console.error('WAV format: %j', format);
   var mformat = format;
-  mformat.sampleRate = 17000;
+  mformat.sampleRate = format.sampleRate / 1.1;
   // encoding the wave file into an MP3 is as simple as calling pipe()
   var encoder = new lame.Encoder(mformat);
   decoder.pipe(encoder).pipe(outputsound);
