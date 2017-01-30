@@ -212,8 +212,8 @@ function tts(x){
   googleTTS(x, 'de', 1.9)
   .then(function (url) {
     console.log(url); // https://translate.google.com/translate_tts?...
-    //var nurl = "https://api.api.ai/v1/tts?text="+encodeURIComponent(x)+"";
-    var nurl = 'https://infinite-lake-18103.herokuapp.com/?text="'+encodeURIComponent(x)+'"&locale=de';
+    var nurl = "https://api.api.ai/v1/tts?text="+encodeURIComponent(x)+"";
+    //var nurl = 'https://infinite-lake-18103.herokuapp.com/?text="'+encodeURIComponent(x)+'"&locale=de';
     console.log(nurl);
     var dest = path.resolve(__dirname, 'base.wav'); // file destination
     console.log('Download to ' + dest + ' ...');
@@ -250,7 +250,7 @@ var outputsound;
 function onFormat (format) {
   console.error('WAV format: %j', format);
   var mformat = format;
-  mformat.sampleRate = Math.floor(format.sampleRate / 1.5);
+  mformat.sampleRate = 19000;//Math.floor(format.sampleRate / 1.5);
   // encoding the wave file into an MP3 is as simple as calling pipe()
   var encoder = new lame.Encoder(mformat);
   decoder.pipe(encoder).pipe(outputsound);
