@@ -5,7 +5,7 @@
       Prototype Ciegielski Head
     </title>
   </head>
-  <body>
+  <body onload="start()">
     <h1>Filler</h1>
     <p>stuff stuff</p>
 
@@ -14,7 +14,9 @@
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script>
       var socket = io();
-      document.getElementById("audio").innerHTML = '<audio src="'+document.URL+'final.mp3 autoplay>';
+      function start(){
+        document.getElementById("audio").innerHTML = '<audio src="'+document.URL+'final.mp3 autoplay>';
+      }
 
       socket.on('audio-update', function(){
         document.getElementById("audio").innerHTML = 'updated <audio src="'+document.URL+'final.mp3'+new Date().getTime()+'" autoplay>';
