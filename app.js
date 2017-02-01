@@ -257,7 +257,7 @@ function onFormat (format) {
   mformat.sampleRate = format.sampleRate/1.3;//Math.floor(format.sampleRate / 1.5);
   // encoding the wave file into an MP3 is as simple as calling pipe()
   var encoder = new lame.Encoder(mformat);
-  decoder.pipe(encoder).pipe(outputsound).end();
+  decoder.pipe(encoder).pipe(outputsound);
   decoder.on('finish', () => {
     io.emit('audio-update');
   });
