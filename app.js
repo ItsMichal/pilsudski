@@ -68,8 +68,6 @@ io.on('connection', function(socket){
 app.post('/webhook', function(rq, rs){
   //Important, API.AI requires this bit
   rs.set('Content-Type', 'application/json');
-  //response
-  var response = "";
 
   //the change in temper value, derived from the JSON given to me from API.AI. the students will change/set this value in API.AI (video tutorial coming soon)
   //might be null/NaN
@@ -93,9 +91,8 @@ app.post('/webhook', function(rq, rs){
       //finally just add the value to the curTemper, updating it.
       curTemper += parseInt(temperDelta);
     }else{
-      //do what you said here
-      rs.send({"speech":(config.responses.stale + " " + aiResponse), "displayText":(config.responses.stale + " " + aiResponse)});
-      tts((config.responses.stale + " " + aiResponse));
+      rs.send({"speech": (config.responses.stale + " " +aiResponse),  "displayText":(config.responses.stale + " " +aiResponse)});
+      tts((config.responses.stale + " " +aiResponse));
     }
   }
 
@@ -118,42 +115,46 @@ app.post('/webhook', function(rq, rs){
   //If you lose...
   if(curTemper <= 0){
 
-    rs.send({"speech": loseResponse, "displayText":loseResponse});
+    rs.send({"speech": aiResponse+" "+loseResponse, "displayText":aiResponse+" "+loseResponse});
     tts(aiResponse+" "+loseResponse);
   //If you lose...
   }else if (curTemper >= winTemper){
     //or If you win
-    rs.send({"speech": winResponse, "displayText":winResponse});
+    rs.send({"speech": aiResponse+" "+winResponse, "displayText":aiResponse+" "+winResponse});
     tts(aiResponse+" "+winResponse);
   }else{
     //otherwise Display Response and find the appropriate response based on anger and config.json
-    console.log(response + " & " + JSON.stringify(config.responses) + "&" + config.responses.neutral + "&" +config.responses.happy);
 
-    if(curTemper > (winTemper-(curTemper/4))){
-      repsonse = config.responses.veryhappy;
-    }else if(curTemper > (winTemper-curTemper/2)){
-      repsonse = config.responses.happy;
-    }else if(curTemper < curTemper/2){
-      response = config.responses.angry;
-    }else if(curTemper < ((3*curTemper)/4)){
+    //debugging this took forever, thanks to JS's dynamic data types.
+
+    //IT TOOK FOREVER BECAUSE OF A
+    //FRIGGIN
+    //TYPO
+
+    //rip
+
+    var response = config.responses.neutral;
+    if(curTemper > ((3*winTemper)/4)){
+      response = config.responses.veryhappy;
+    }else if(curTemper > winTemper/2){
+      response = config.responses.happy;
+    }else if(curTemper < winTemper-((3*winTemper)/4)){
       response = config.responses.veryangry;
-    }else{
-      response = config.responses.neutral;
+    }else if(curTemper < winTemper/2){
+      response = config.responses.angry;
     }
+
+    //tells user if they are doing good or nah\
+    //terrible logic, idgaf tho
+    var feedback = config.responses.same;
+    if(!isNaN(temperDelta) && parseInt(temperDelta) != 0){
+      feedback = (parseInt(temperDelta) > 0) ? config.responses.good : config.responses.bad;
+    }
+
     //And then just combine the two
-    rs.send({"speech": (aiResponse+" "+response), "displayText":(aiResponse+" "+response)});
-    tts(aiResponse+" "+response);
-
+    rs.send({"speech": (aiResponse+" "+feedback+" "+response), "displayText":(aiResponse+" "+feedback+" "+response)});
+    tts((aiResponse+" "+feedback+" "+response));
   }
-
-  //Finally, add the current dialogue to the staleTexts. If it's not already there of course
-  if(staleTexts.indexOf(intent) == -1)
-    staleTexts.push(intent);
-
-
-  //DEBUG BLOC
-  ///*uncomment to debug*/ console.log(rq);
-  ///*uncomment to debug*/ console.log(temperDelta);
 });
 
 
