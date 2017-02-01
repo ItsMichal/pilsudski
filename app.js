@@ -171,12 +171,12 @@ function downloadFile (url, dest) {
     var options = {
       host: info.host,
       path: info.path,
-      headers: {
+      /*headers: {
 
         'Accept-Language': 'en-US',
         'Authorization': 'Bearer c1f828342331434c97ca20be01c3e317'
 
-      }
+      }*/
     };
 
     httpClient.get(options, function(res) {
