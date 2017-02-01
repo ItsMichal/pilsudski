@@ -267,8 +267,11 @@ function ptchshift(){
   outputsound = fs.createWriteStream("final.mp3");
   decoder = new wav.Reader();
   decoder.on('format', onFormat);
-  inputsound.pipe(decoder);
-  io.emit('audio-update');
+  inputsound.pipe(decoder).end();
+  inputsound.on('finish', () => {
+    io.emit('audio-update');
+  });
+
 
   //old broken stuff
   // var ac = new AudioContext();
