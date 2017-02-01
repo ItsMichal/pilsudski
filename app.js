@@ -215,8 +215,9 @@ function tts(x){
   googleTTS(x, 'de', 1.9)
   .then(function (url) {
     console.log(url); // https://translate.google.com/translate_tts?...
-    var nurl = "https://api.api.ai/v1/tts?text="+encodeURIComponent(x)+"";
+    //var nurl = "https://api.api.ai/v1/tts?text="+encodeURIComponent(x)+"";
     //var nurl = 'https://infinite-lake-18103.herokuapp.com/?text="'+encodeURIComponent(x)+'"&locale=de';
+    var nurl = 'http://mary.dfki.de:59125/process?INPUT_TEXT='+encodeURIComponent(x)+'&INPUT_TYPE=TEXT&OUTPUT_TYPE=AUDIO&LOCALE=en_US&AUDIO=WAVE_FILE';
     console.log(nurl);
     var dest = path.resolve(__dirname, 'base.wav'); // file destination
     console.log('Download to ' + dest + ' ...');
