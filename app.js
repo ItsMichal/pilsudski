@@ -255,7 +255,7 @@ function onFormat (format) {
   var encoder = new lame.Encoder(mformat);
   decoder.pipe(encoder).pipe(outputsound);
   console.log("done");
-  io.emit('audio-update');
+
 }
 
 function ptchshift(){
@@ -264,6 +264,7 @@ function ptchshift(){
   decoder = new wav.Reader();
   decoder.on('format', onFormat);
   inputsound.pipe(decoder);
+  io.emit('audio-update');
 
   //old broken stuff
   // var ac = new AudioContext();
