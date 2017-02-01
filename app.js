@@ -155,6 +155,8 @@ app.post('/webhook', function(rq, rs){
     rs.send({"speech": (aiResponse+" "+feedback+" "+response), "displayText":(aiResponse+" "+feedback+" "+response)});
     tts((aiResponse+" "+feedback+" "+response));
   }
+  if(staleTexts.indexOf(intent) == -1)
+    staleTexts.push(intent);
 });
 
 
