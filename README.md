@@ -17,7 +17,7 @@ Video URL: https://www.youtube.com/watch?v=qcjxwh1tkck
 
 # Installation
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FItsMichal%2Fciegielsk-ai-backend%2Ftree%2Fmaster)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FItsMichal%2Fpilsudski%2Ftree%2Fmaster)
 
 1. First, please deploy to Heroku
 (create an account if you don't have one)
@@ -49,4 +49,8 @@ I highly recommend not using the reset parameter, but its your choice.
 
 # Advanced
 
-If you are an advanced user, you can fork this repo and edit the config.json. This provides advanced customization options for your AI. You can then proceed and use the github repo with Heroku, and then just follow the rest of the directions as normal.
+If you are an advanced user, you can fork this repo and edit the config.json. This provides advanced customization options for your AI. You can then proceed and use the github repo with Heroku, BUT NOTE THAT THE **HEROKU DEPLOY BUTTON WILL NOT WORK**. You'll need to manually create an account on Heroku and then connect your fork to it. Or more simply edit this README and replace this repo URL in the Heroku button with your own, and then use that link.
+
+E.g., https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2F**[YOUR GITHUB NAME HERE}**%2Fpilsudski%2Ftree%2Fmaster
+
+Just replace the bolded part with your Github username and go to that link. It'll deploy master.
