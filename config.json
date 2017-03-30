@@ -6,8 +6,8 @@
   },
   "responses": {
     "__GAME_ENDING":"RESPONSES",
-    "win":"After careful consideration, a declaration of war may not be the best course of action for the German Empire. I do not wish to warmonger without good reason.",
-    "lose":"I have decided to declare war immediately. Your pathetic attempts will not stop me or the German Empire.",
+    "win":"After careful consideration, a declaration of war may not be the best course of action for my empire. I do not wish to warmonger without good reason.",
+    "lose":"I have decided to declare war immediately. Your pathetic attempts will not stop me or my empire.",
 
     "__TEMPERAMENT":"RESPONSES",
     "veryhappy":"Overall, Your points are incredibly valid...your ideas do hold water.",
