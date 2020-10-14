@@ -3,9 +3,13 @@
 
 Custom made API-AI webhook. Michal Bodzianowski C 2017, MIT License, v1.2.0
 
-Named after the leader of Polish troops during WW1
+Created sophomore year of high school. Project is retired.
 
-Report bugs to michal.bodzianowski@stemhigh.org
+### [Featured on the Front Page of the Denver Post](https://www.denverpost.com/2017/02/21/highlands-ranch-history-class-artificial-intelligence/)
+
+### [3 Minute Media Pitch](https://youtu.be/a09E8_-fFIc)
+
+Named after the leader of Polish troops during WW1
 
 # Youtube Video Guide
 
